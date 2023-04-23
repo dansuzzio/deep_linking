@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'user_controller.dart';
+import '../repositories/user_repository.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -13,8 +13,8 @@ class LoginPage extends StatelessWidget {
         child: ElevatedButton(
           child: const Text('Login'),
           onPressed: () {
-            User.isLoggedIn = true;
-            Navigator.of(context).pushNamed('/topics');
+            UserRepository.login();
+            Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
           },
         ),
       ),
