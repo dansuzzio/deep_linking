@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../repositories/user_repository.dart';
 
@@ -14,7 +15,8 @@ class LoginPage extends StatelessWidget {
           child: const Text('Login'),
           onPressed: () {
             UserRepository.login();
-            Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+            // Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
+            Get.offAllNamed('/home');
           },
         ),
       ),
