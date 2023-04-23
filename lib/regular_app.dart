@@ -23,7 +23,10 @@ class RegularApp extends StatelessWidget {
         '/home': (context) => _checkUserAndReturnWidget(const NavigationBarPage()),
         '/settings': (context) => _checkUserAndReturnWidget(const SettingsPage()),
         '/topics': (context) => _checkUserAndReturnWidget(const TopicsPage()),
-        '/articles': (context) => _checkUserAndReturnWidget(const ArticleListPage()),
+        '/articles': (context) {
+          final topic = ModalRoute.of(context)?.settings.arguments as String;
+          return _checkUserAndReturnWidget(ArticleListPage(topic: topic));
+        },
         '/article': (context) => _checkUserAndReturnWidget(const ArticleDetailsPage()),
         '/new': (context) {
           final title = ModalRoute.of(context)?.settings.arguments as String? ?? 'Item';

@@ -4,8 +4,9 @@ abstract class TopicsRepository {
     'TV Series',
     'Books',
     'Food',
-    'Music',
+    'Animals',
     'Travel',
+    'Music',
   ];
 
   static List<String> get topics => _topics;

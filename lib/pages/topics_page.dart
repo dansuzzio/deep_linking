@@ -15,26 +15,20 @@ class _TopicsPageState extends State<TopicsPage> {
 
   @override
   void initState() {
-    _sortedTopics.sort((a, b) => _isAscendingOrder ? a.compareTo(b) : b.compareTo(a));
     super.initState();
+    _sortTopics();
   }
 
-  void _sortTopics({bool isSameDirection = false}) {
-    if (isSameDirection) {
-      setState(() => _sortedTopics.sort((a, b) => _isAscendingOrder ? a.compareTo(b) : b.compareTo(a)));
-    } else {
-      setState(() {
-        _sortedTopics.sort((a, b) => _isAscendingOrder ? b.compareTo(a) : a.compareTo(b));
-        _isAscendingOrder = !_isAscendingOrder;
-      });
-    }
+  void _sortTopics({bool switchDirection = false}) {
+    if (switchDirection) _isAscendingOrder = !_isAscendingOrder;
+    setState(() => _sortedTopics.sort((a, b) => _isAscendingOrder ? a.compareTo(b) : b.compareTo(a)));
   }
 
   Future<void> _addTopic() async {
     final topic = await Navigator.of(context).pushNamed('/new', arguments: 'Topic');
-    if (topic != null) {
+    if (topic != null && !TopicsRepository.topics.contains(topic)) {
       TopicsRepository.addTopic(topic as String);
-      _sortTopics(isSameDirection: true);
+      _sortTopics();
     }
   }
 
@@ -49,7 +43,7 @@ class _TopicsPageState extends State<TopicsPage> {
         title: const Text('Topics'),
         actions: [
           // Sort button
-          IconButton(icon: const Icon(Icons.sort_by_alpha), onPressed: _sortTopics),
+          IconButton(icon: const Icon(Icons.sort_by_alpha), onPressed: () => _sortTopics(switchDirection: true)),
 
           // New topic button
           IconButton(icon: const Icon(Icons.add), onPressed: _addTopic),
@@ -58,9 +52,9 @@ class _TopicsPageState extends State<TopicsPage> {
 
       // Topics list
       body: ListView.builder(
-        itemCount: TopicsRepository.topics.length,
+        itemCount: _sortedTopics.length,
         itemBuilder: (context, index) {
-          final topic = TopicsRepository.topics[index];
+          final topic = _sortedTopics[index];
           return ListTile(
             // Title
             title: Text(topic),
