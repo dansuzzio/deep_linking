@@ -16,6 +16,7 @@ class GetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      // navigatorKey: GlobalKey<NavigatorState>(),
       debugShowCheckedModeBanner: false,
       title: 'Deep Linking',
       initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
@@ -35,6 +36,17 @@ class GetApp extends StatelessWidget {
         //         final topic = Get.parameters['topic'];
         //         return ArticleListPage(topic: topic ?? 'Articles');
         //       },
+        //       children: [
+        //         GetPage(
+        //           name: '/:article',
+        //           page: () {
+        //             return ArticleDetailsPage(
+        //               topic: Get.parameters['topic']!,
+        //               title: Get.parameters['article']!,
+        //             );
+        //           },
+        //         ),
+        //       ],
         //     ),
         //   ],
         // ),
@@ -53,6 +65,62 @@ class GetApp extends StatelessWidget {
         ),
         GetPage(name: '/new', page: () => AddItemPage(title: Get.arguments!)),
       ],
+      unknownRoute: GetPage(
+        name: '/notfound',
+        page: () => Scaffold(appBar: AppBar(title: const Text('Unknown route'))),
+      ),
     );
   }
 }
+
+final topicsNavigator = Navigator(
+  key: Get.nestedKey('topics')!.navigatorKey,
+  initialRoute: '/topics',
+  pages: [
+    GetPage(name: '/topics', page: () => const TopicsPage()),
+    GetPage(
+      name: '/topics/:topic',
+      page: () => ArticleListPage(topic: Get.parameters['topic']!),
+    ),
+    GetPage(
+      name: '/topics/:topic/:article',
+      page: () {
+        return ArticleDetailsPage(
+          topic: Get.parameters['topic']!,
+          title: Get.parameters['article']!,
+        );
+      },
+    ),
+  ],
+  // onGenerateRoute: (settings) {
+  //   final totalSections = (settings.name ?? '').split('/').length;
+  //   switch (totalSections) {
+  //     case 2: // Article list
+  //       return GetPageRoute(
+  //         settings: settings,
+  //         page: () => ArticleListPage(topic: Get.parameters['topic']!),
+  //       );
+  //     case 3: // Article details
+  //       return GetPageRoute(
+  //         settings: settings,
+  //         page: () => ArticleDetailsPage(
+  //           topic: Get.parameters['topic']!,
+  //           title: Get.parameters['article']!,
+  //         ),
+  //       );
+  //     default:
+  //       return GetPageRoute(settings: settings, page: () => const TopicsPage());
+  //   }
+  // },
+);
+
+final settingsNavigator = GetNavigator(
+  key: Get.nestedKey('settings')!.navigatorKey,
+  initialRoute: '/settings',
+  pages: [
+    GetPage(name: '/settings', page: () => const LoginPage()),
+  ],
+  // onGenerateRoute: (settings) {
+  //   return GetPageRoute(settings: settings, page: () => const SettingsPage());
+  // },
+);

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../apps/get_app.dart';
 import 'settings_page.dart';
 import 'topics_page.dart';
 
@@ -11,7 +13,7 @@ class NavigationBarPage extends StatefulWidget {
 }
 
 class _NavigationBarPageState extends State<NavigationBarPage> {
-  var _bottomBarIndex = 0;
+  var _bottomBarIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,13 @@ class _NavigationBarPageState extends State<NavigationBarPage> {
           SettingsPage(),
         ],
       ),
+      // body: IndexedStack(
+      //   index: _bottomBarIndex,
+      //   children: [
+      //     topicsNavigator,
+      //     settingsNavigator,
+      //   ],
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomBarIndex,
         items: const [
