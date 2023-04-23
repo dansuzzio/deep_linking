@@ -66,7 +66,7 @@ class _TopicsPageState extends State<TopicsPage> {
             ),
 
             // Action: go to articles page
-            onTap: () => Navigator.of(context).pushNamed('/articles', arguments: topic),
+            onTap: () => Navigator.of(context).pushNamed('/topics/articles', arguments: topic),
           );
         },
       ),
