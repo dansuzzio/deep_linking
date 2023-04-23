@@ -113,7 +113,10 @@ class _ArticleListPageState extends State<ArticleListPage> {
             ),
 
             // Action: go to article details page
-            onTap: () => Navigator.of(context).pushNamed('/article', arguments: article),
+            onTap: () => Navigator.of(context).pushNamed(
+              '/article',
+              arguments: {'topic': widget.topic, 'title': article.title},
+            ),
           );
         },
       ),
