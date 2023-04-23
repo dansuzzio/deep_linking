@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.deep_linking">
+    package="com.danielsuzzio.deeplinking">
    <application
         android:label="deep_linking"
         android:name="${applicationName}"

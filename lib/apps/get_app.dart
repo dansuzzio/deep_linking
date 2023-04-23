@@ -40,7 +40,7 @@ class GetApp extends StatelessWidget {
         // ),
         GetPage(
           name: '/topics/:topic',
-          page: () => ArticleListPage(topic: Get.parameters['topic'] ?? 'Articles'),
+          page: () => ArticleListPage(topic: Get.parameters['topic']!),
         ),
         GetPage(
           name: '/topics/:topic/:article',
