@@ -23,9 +23,8 @@ class GetApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
         GetPage(name: '/home', page: () => const NavigationBarPage()),
-        GetPage(name: '/settings', page: () => const LoginPage()),
-        GetPage(name: '/login', page: () => const SettingsPage()),
-        GetPage(name: '/topics', page: () => const TopicsPage()),
+        // GetPage(name: '/settings', page: () => const SettingsPage()),
+        // GetPage(name: '/topics', page: () => const TopicsPage()),
         // GetPage(
         //   name: '/topics',
         //   page: () => const TopicsPage(),

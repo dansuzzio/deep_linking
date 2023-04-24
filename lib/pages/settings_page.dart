@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../repositories/user_repository.dart';
 
@@ -28,8 +29,9 @@ class SettingsPage extends StatelessWidget {
                 ),
               );
               if (shouldLogout == true) {
-                UserRepository.logout();
-                if (context.mounted) Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                await UserRepository.logout();
+                // if (context.mounted) Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
+                if (context.mounted) Get.offAllNamed('/login');
               }
             },
           ),

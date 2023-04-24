@@ -1,9 +1,9 @@
+import 'local_storage.dart';
+
 abstract class UserRepository {
-  static bool _isLoggedIn = false;
+  static bool get isLoggedIn => LocalStorage.getBool(LocalStorageKeys.isLoggedIn) ?? false;
 
-  static bool get isLoggedIn => _isLoggedIn;
+  static Future<void> login() => LocalStorage.setBool(LocalStorageKeys.isLoggedIn, true);
 
-  static void login() => _isLoggedIn = true;
-
-  static void logout() => _isLoggedIn = false;
+  static Future<void> logout() => LocalStorage.delete(LocalStorageKeys.isLoggedIn);
 }

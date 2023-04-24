@@ -26,10 +26,12 @@ class _ArticleDetailsPageState extends State<ArticleDetailsPage> {
     setState(() => _isLoading = true);
     await Future.delayed(const Duration(seconds: 1));
     final article = ArticlesRepository.getArticleFromTopicByTitle(widget.topic, widget.title);
-    setState(() {
-      _article = article;
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _article = article;
+        _isLoading = false;
+      });
+    }
   }
 
   @override

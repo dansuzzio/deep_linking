@@ -13,8 +13,8 @@ class LoginPage extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           child: const Text('Login'),
-          onPressed: () {
-            UserRepository.login();
+          onPressed: () async {
+            await UserRepository.login();
             // Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
             Get.offAllNamed('/home');
           },

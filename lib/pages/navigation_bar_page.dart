@@ -13,7 +13,7 @@ class NavigationBarPage extends StatefulWidget {
 }
 
 class _NavigationBarPageState extends State<NavigationBarPage> {
-  var _bottomBarIndex = 1;
+  int _bottomBarIndex = 0;
 
   @override
   Widget build(BuildContext context) {
