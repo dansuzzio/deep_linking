@@ -32,7 +32,10 @@ final _router = GoRouter(
   routes: [
     ShellRoute(
       navigatorKey: GlobalKey<NavigatorState>(debugLabel: 'shell'),
-      builder: (context, state, child) => NavigationBarPage(body: child),
+      builder: (context, state, child) => NavigationBarPage(
+        bottomBarIndex: state.location == '/settings' ? 1 : 0,
+        body: child,
+      ),
       routes: [
         GoRoute(
           path: '/topics',
