@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'apps/get_app.dart';
+import 'apps/go_router_app.dart';
 import 'apps/regular_app.dart';
 import 'repositories/local_storage.dart';
 
@@ -9,6 +11,9 @@ Future<void> main() async {
 
   await LocalStorage.init();
 
+  usePathUrlStrategy();
+
   // runApp(const RegularApp());
-  runApp(const GetApp());
+  // runApp(const GetApp());
+  runApp(const GoRouterApp());
 }

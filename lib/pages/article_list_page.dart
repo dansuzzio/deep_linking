@@ -1,6 +1,7 @@
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../models/article.dart';
 import '../repositories/articles_repository.dart';
@@ -118,7 +119,8 @@ class _ArticleListPageState extends State<ArticleListPage> {
             //   '/topics/articles/details',
             //   arguments: {'topic': widget.topic, 'title': article.title},
             // ),
-            onTap: () => Get.toNamed('/topics/${widget.topic}/${article.title}'),
+            // onTap: () => Get.toNamed('/topics/${widget.topic}/${article.title}'),
+            onTap: () => context.go('/topics/${widget.topic}/${article.title}'),
           );
         },
       ),

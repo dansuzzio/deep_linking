@@ -16,13 +16,12 @@ class GetApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      // navigatorKey: GlobalKey<NavigatorState>(),
       debugShowCheckedModeBanner: false,
       title: 'Deep Linking',
       initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
       getPages: [
         GetPage(name: '/login', page: () => const LoginPage()),
-        GetPage(name: '/home', page: () => const NavigationBarPage()),
+        // GetPage(name: '/home', page: () => const NavigationBarPage()),
         // GetPage(name: '/settings', page: () => const SettingsPage()),
         // GetPage(name: '/topics', page: () => const TopicsPage()),
         // GetPage(

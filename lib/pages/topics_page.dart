@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 
 import '../repositories/topics_repository.dart';
 
@@ -68,7 +69,8 @@ class _TopicsPageState extends State<TopicsPage> {
 
             // Action: go to articles page
             // onTap: () => Navigator.of(context).pushNamed('/topics/articles', arguments: topic),
-            onTap: () => Get.toNamed('/topics/$topic'),
+            // onTap: () => Get.toNamed('/topics/$topic'),
+            onTap: () => context.go('/topics/$topic'),
           );
         },
       ),

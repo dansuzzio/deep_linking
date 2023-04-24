@@ -20,7 +20,7 @@ class RegularApp extends StatelessWidget {
       initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
       routes: {
         '/login': (context) => const LoginPage(),
-        '/home': (context) => const NavigationBarPage(),
+        // '/home': (context) => const NavigationBarPage(),
         '/settings': (context) => const SettingsPage(),
         '/topics': (context) => const TopicsPage(),
         '/topics/articles': (context) {
