@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
-import '../repositories/user_repository.dart';
+import '../states/settings_page_state.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  final SettingsPageState state;
+
+  const SettingsPage({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -15,27 +15,7 @@ class SettingsPage extends StatelessWidget {
         children: [
           ListTile(
             title: const Text('Logout'),
-            onTap: () async {
-              final shouldLogout = await showModalBottomSheet<bool?>(
-                context: context,
-                builder: (context) => Column(
-                  children: [
-                    const SizedBox(height: 30),
-                    const Text('Logout?'),
-                    const SizedBox(height: 30),
-                    OutlinedButton(onPressed: () => Navigator.of(context).pop(true), child: const Text('Yes')),
-                    const SizedBox(height: 10),
-                    OutlinedButton(onPressed: () => Navigator.of(context).pop(false), child: const Text('No')),
-                  ],
-                ),
-              );
-              if (shouldLogout == true) {
-                await UserRepository.logout();
-                // if (context.mounted) Navigator.of(context).pushNamedAndRemoveUntil('/login', (route) => false);
-                // Get.offAllNamed('/login');
-                if (context.mounted) context.go('/login');
-              }
-            },
+            onTap: state.logout,
           ),
         ],
       ),

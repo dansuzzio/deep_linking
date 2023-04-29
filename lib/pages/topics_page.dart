@@ -1,42 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
-import '../repositories/topics_repository.dart';
+import '../states/topics_page_state.dart';
 
-class TopicsPage extends StatefulWidget {
-  const TopicsPage({super.key});
+class TopicsPage extends StatelessWidget {
+  final TopicsPageState state;
 
-  @override
-  State<TopicsPage> createState() => _TopicsPageState();
-}
-
-class _TopicsPageState extends State<TopicsPage> {
-  final _sortedTopics = TopicsRepository.topics;
-  var _isAscendingOrder = true;
-
-  @override
-  void initState() {
-    super.initState();
-    _sortTopics();
-  }
-
-  void _sortTopics({bool switchDirection = false}) {
-    if (switchDirection) _isAscendingOrder = !_isAscendingOrder;
-    setState(() => _sortedTopics.sort((a, b) => _isAscendingOrder ? a.compareTo(b) : b.compareTo(a)));
-  }
-
-  Future<void> _addTopic() async {
-    final topic = await Navigator.of(context).pushNamed('/new', arguments: 'Topic');
-    if (topic != null && !TopicsRepository.topics.contains(topic)) {
-      TopicsRepository.addTopic(topic as String);
-      _sortTopics();
-    }
-  }
-
-  void _deleteTopic(String topic) {
-    setState(() => TopicsRepository.removeTopic(topic));
-  }
+  const TopicsPage({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -45,18 +14,18 @@ class _TopicsPageState extends State<TopicsPage> {
         title: const Text('Topics'),
         actions: [
           // Sort button
-          IconButton(icon: const Icon(Icons.sort_by_alpha), onPressed: () => _sortTopics(switchDirection: true)),
+          IconButton(icon: const Icon(Icons.sort_by_alpha), onPressed: state.sortTopics),
 
           // New topic button
-          IconButton(icon: const Icon(Icons.add), onPressed: _addTopic),
+          IconButton(icon: const Icon(Icons.add), onPressed: state.createTopic),
         ],
       ),
 
       // Topics list
       body: ListView.builder(
-        itemCount: _sortedTopics.length,
+        itemCount: state.topics.length,
         itemBuilder: (context, index) {
-          final topic = _sortedTopics[index];
+          final topic = state.topics[index];
           return ListTile(
             // Title
             title: Text(topic),
@@ -64,13 +33,11 @@ class _TopicsPageState extends State<TopicsPage> {
             // Delete button
             trailing: IconButton(
               icon: const Icon(Icons.delete),
-              onPressed: () => _deleteTopic(topic),
+              onPressed: () => state.deleteTopic(topic),
             ),
 
             // Action: go to articles page
-            // onTap: () => Navigator.of(context).pushNamed('/topics/articles', arguments: topic),
-            // onTap: () => Get.toNamed('/topics/$topic'),
-            onTap: () => context.go('/topics/$topic'),
+            onTap: () => state.showTopicArticles(topic),
           );
         },
       ),

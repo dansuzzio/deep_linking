@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
-class AddItemPage extends StatefulWidget {
-  final String title;
+import '../states/create_item_page_state.dart';
 
-  const AddItemPage({super.key, required this.title});
+class CreateItemPage extends StatelessWidget {
+  final CreateItemPageState state;
 
-  @override
-  State<AddItemPage> createState() => _AddItemPageState();
-}
-
-class _AddItemPageState extends State<AddItemPage> {
-  String? _item;
+  const CreateItemPage({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('New ${widget.title}')),
+      appBar: AppBar(title: Text('New ${state.title}')),
       body: Column(
         children: [
           TextField(
@@ -24,17 +19,17 @@ class _AddItemPageState extends State<AddItemPage> {
               contentPadding: EdgeInsets.all(20),
             ),
             textCapitalization: TextCapitalization.words,
-            onChanged: (value) => setState(() => _item = value),
+            onChanged: state.onItemChanged,
             onSubmitted: (value) => Navigator.of(context).pop(value),
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-            onPressed: () => Navigator.of(context).pop(_item),
+            onPressed: state.submit,
             child: const Text('Create'),
           ),
           const SizedBox(height: 20),
           OutlinedButton(
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: state.cancel,
             child: const Text('Cancel'),
           ),
         ],

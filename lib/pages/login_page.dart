@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
 
-import '../repositories/user_repository.dart';
+import '../states/login_page_state.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final LoginPageState state;
+
+  const LoginPage({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +13,8 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Login')),
       body: Center(
         child: ElevatedButton(
+          onPressed: state.login,
           child: const Text('Login'),
-          onPressed: () async {
-            await UserRepository.login();
-            // Navigator.of(context).pushNamedAndRemoveUntil('/home', (route) => false);
-            // Get.offAllNamed('/home');
-            if (context.mounted) context.go('/topics');
-          },
         ),
       ),
     );

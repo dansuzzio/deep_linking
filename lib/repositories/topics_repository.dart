@@ -1,3 +1,5 @@
+import 'articles_repository.dart';
+
 abstract class TopicsRepository {
   static final _topics = [
     'Movies',
@@ -13,5 +15,8 @@ abstract class TopicsRepository {
 
   static void addTopic(String topic) => _topics.add(topic);
 
-  static void removeTopic(String topic) => _topics.remove(topic);
+  static void removeTopic(String topic) {
+    _topics.remove(topic);
+    ArticlesRepository.articles.removeWhere((article) => article.topic == topic);
+  }
 }
