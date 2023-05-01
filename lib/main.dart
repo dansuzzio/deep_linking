@@ -13,7 +13,13 @@ Future<void> main() async {
 
   usePathUrlStrategy();
 
-  // runApp(const RegularApp());
-  runApp(const GetxApp());
+  // Regular Navigator 2.0
+  await initializeDependencies();
+  runApp(const RegularApp());
+
+  // GetX NAvigation
+  // runApp(const GetxApp());
+
+  // GoRouter navigation
   // runApp(const GoRouterApp());
 }

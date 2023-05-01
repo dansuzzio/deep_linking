@@ -13,7 +13,8 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(title: const Text('Login')),
       body: Center(
         child: ElevatedButton(
-          onPressed: state.login,
+          // onPressed: state.login,
+          onPressed: () => state.login(context),
           child: const Text('Login'),
         ),
       ),

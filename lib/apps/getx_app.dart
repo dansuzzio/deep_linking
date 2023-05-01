@@ -18,7 +18,7 @@ class GetxApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Deep Linking',
-      initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
+      // initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
       getPages: [
         GetPage(name: '/login', page: () => const LoginPageGetxBuilder()),
         GetPage(name: '/home', page: () => const NavigationBarPageGetxBuilder()),
