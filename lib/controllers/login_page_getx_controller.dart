@@ -16,6 +16,6 @@ class LoginPageGetxController extends GetxController implements LoginPageState {
   Future<void> login(BuildContext context) async {
     await UserRepository.login();
     userState.isLoggedIn = true;
-    navigation.setPath('/home');
+    navigation.setPath('/topics');
   }
 }

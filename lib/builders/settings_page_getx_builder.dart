@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../components/app_navigation_bar.dart';
 import '../controllers/app_navigation_getx_controller.dart';
 import '../controllers/settings_page_getx_controller.dart';
 import '../controllers/user_getx_controller.dart';
@@ -13,12 +14,17 @@ class SettingsPageGetxBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     final navigationController = Get.find<AppNavigationGetxController>();
     final userController = Get.find<UserGetxController>();
-    return GetBuilder(
-      init: SettingsPageGetxController(
-        navigation: navigationController,
-        userState: userController,
+
+    return AppNavigationBar(
+      onTabSelected: (value) => value == 0 ? navigationController.setPath('/topics') : null,
+      selectedTabIndex: 1,
+      selectedTabBody: GetBuilder(
+        init: SettingsPageGetxController(
+          navigation: navigationController,
+          userState: userController,
+        ),
+        builder: (controller) => SettingsPage(state: controller),
       ),
-      builder: (controller) => SettingsPage(state: controller),
     );
   }
 }

@@ -1,9 +1,13 @@
 import 'package:get/get.dart';
 
 import '../repositories/topics_repository.dart';
+import '../states/app_navigation_state.dart';
 import '../states/topics_page_state.dart';
 
 class TopicsPageGetxController extends GetxController implements TopicsPageState {
+  final AppNavigationState navigation;
+  TopicsPageGetxController({required this.navigation});
+
   var _topics = <String>[];
   @override
   List<String> get topics => _topics;
@@ -42,6 +46,7 @@ class TopicsPageGetxController extends GetxController implements TopicsPageState
 
   @override
   void showTopicArticles(String topic) {
-    Get.toNamed('/topics/$topic', id: 1);
+    // Get.toNamed('/topics/$topic', id: 1);
+    navigation.setPath('/topics/$topic');
   }
 }

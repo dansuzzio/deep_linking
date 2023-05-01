@@ -3,17 +3,24 @@ import 'package:get/get.dart';
 
 import '../models/article.dart';
 import '../repositories/articles_repository.dart';
+import '../states/app_navigation_state.dart';
 import '../states/article_list_page_state.dart';
 
 enum _SortBy { titleAscending, titleDescending, dateAscending, dateDescending }
 
 class ArticleListPageGetxController extends GetxController implements ArticleListPageState {
-  @override
-  final String topic;
+  // @override
+  // final String topic;
 
-  ArticleListPageGetxController({required this.topic});
+  // ArticleListPageGetxController({required this.topic});
+
+  final AppNavigationState navigation;
+  ArticleListPageGetxController({required this.navigation});
+  @override
+  String get topic => Uri.parse(navigation.path).pathSegments.last;
 
   var _articles = <Article>[];
+
   @override
   List<Article> get articles => _articles;
 

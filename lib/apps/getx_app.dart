@@ -21,7 +21,7 @@ class GetxApp extends StatelessWidget {
       // initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
       getPages: [
         GetPage(name: '/login', page: () => const LoginPageGetxBuilder()),
-        GetPage(name: '/home', page: () => const NavigationBarPageGetxBuilder()),
+        // GetPage(name: '/home', page: () => const NavigationBarPageGetxBuilder()),
       ],
       unknownRoute: GetPage(
         name: '/notfound',

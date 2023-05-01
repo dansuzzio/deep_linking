@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../builders/login_page_getx_builder.dart';
-import '../builders/navigation_bar_page_getx_builder.dart';
 import '../controllers/app_navigation_getx_controller.dart';
 import '../controllers/user_getx_controller.dart';
 import '../states/app_navigation_state.dart';
@@ -39,9 +37,12 @@ class RegularApp extends StatelessWidget {
 class RouteConfiguration {
   final String? routeName;
 
-  RouteConfiguration.login() : routeName = '/login';
-  RouteConfiguration.home() : routeName = '/home';
   RouteConfiguration.notFound() : routeName = '/not-found';
+  RouteConfiguration.login() : routeName = '/login';
+  RouteConfiguration.settings() : routeName = '/settings';
+  RouteConfiguration.topics() : routeName = '/topics';
+  RouteConfiguration.articles() : routeName = '/topics/:topic';
+  RouteConfiguration.article() : routeName = '/topics/:topic/:article';
 }
 
 class AppRouterDelegate extends RouterDelegate<RouteConfiguration> with ChangeNotifier, PopNavigatorRouterDelegateMixin<RouteConfiguration> {
@@ -52,39 +53,15 @@ class AppRouterDelegate extends RouterDelegate<RouteConfiguration> with ChangeNo
 
   AppRouterDelegate({required this.state}) : navigatorKey = GlobalKey<NavigatorState>();
 
-  List<Page> get pages => state.isUnknonwnRoute
-      ? [
-          const MaterialPage(
-            key: ValueKey('not-found'),
-            name: '/not-found',
-            child: Center(child: Text('404')),
-          ),
-        ]
-      : state.isLoggedIn
-          ? [
-              const MaterialPage(
-                key: ValueKey('home'),
-                name: '/home',
-                child: NavigationBarPageGetxBuilder(),
-              ),
-            ]
-          : [
-              const MaterialPage(
-                key: ValueKey('login'),
-                name: '/login',
-                child: LoginPageGetxBuilder(),
-              ),
-            ];
-
   @override
   RouteConfiguration get currentConfiguration {
-    if (state.isUnknonwnRoute) {
-      return RouteConfiguration.notFound();
-    } else if (!state.isLoggedIn) {
-      return RouteConfiguration.login();
-    } else {
-      return RouteConfiguration.home();
-    }
+    final totalSegments = Uri.parse(state.path).pathSegments.length;
+    if (state.isUnknonwnRoute) return RouteConfiguration.notFound();
+    if (!state.isLoggedIn) return RouteConfiguration.login();
+    if (state.path == '/settings') return RouteConfiguration.settings();
+    if (totalSegments == 2) return RouteConfiguration.articles();
+    if (totalSegments == 3) return RouteConfiguration.article();
+    return RouteConfiguration.topics();
   }
 
   @override
@@ -94,7 +71,8 @@ class AppRouterDelegate extends RouterDelegate<RouteConfiguration> with ChangeNo
       onPopPage: (route, result) {
         return route.didPop(result);
       },
-      pages: pages,
+      reportsRouteUpdateToEngine: true,
+      pages: state.pages,
     );
   }
 
@@ -108,24 +86,20 @@ class AppRouterDelegate extends RouterDelegate<RouteConfiguration> with ChangeNo
 class AppRouteInformationParser extends RouteInformationParser<RouteConfiguration> {
   @override
   Future<RouteConfiguration> parseRouteInformation(RouteInformation routeInformation) async {
-    final uri = Uri.parse(routeInformation.location!);
-    // Handle '/'
-    if (uri.pathSegments.isEmpty) {
-      return RouteConfiguration.home();
+    // print('parseRouteInformation location: ${routeInformation.location}');
+    final pathSegments = Uri.parse(routeInformation.location!).pathSegments;
+
+    if (pathSegments.isEmpty) return RouteConfiguration.topics();
+
+    if (pathSegments.length == 1) {
+      if (pathSegments[0] == 'login') return RouteConfiguration.login();
+      if (pathSegments[0] == 'settings') return RouteConfiguration.settings();
+      return RouteConfiguration.topics();
     }
 
-    // Handle '/login'
-    // Handle '/home'
-    if (uri.pathSegments.length == 1) {
-      if (uri.pathSegments[0] == 'login') {
-        return RouteConfiguration.login();
-      }
-      if (uri.pathSegments[0] == 'home') {
-        return RouteConfiguration.home();
-      }
-    }
+    if (pathSegments.length == 2) return RouteConfiguration.articles();
+    if (pathSegments.length == 3) return RouteConfiguration.article();
 
-    // Handle /404
     return RouteConfiguration.notFound();
   }
 
