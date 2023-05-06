@@ -14,10 +14,11 @@ class ArticleListPageGetxController extends GetxController implements ArticleLis
 
   // ArticleListPageGetxController({required this.topic});
 
-  final AppNavigationState navigation;
-  ArticleListPageGetxController({required this.navigation});
+  // final AppNavigationState navigation;
+  // ArticleListPageGetxController({required this.navigation});
   @override
-  String get topic => Uri.parse(navigation.path).pathSegments.last;
+  // String get topic => Uri.parse(navigation.path).pathSegments.last;
+  String get topic => 'topic';
 
   var _articles = <Article>[];
 

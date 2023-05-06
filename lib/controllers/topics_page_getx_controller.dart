@@ -5,8 +5,9 @@ import '../states/app_navigation_state.dart';
 import '../states/topics_page_state.dart';
 
 class TopicsPageGetxController extends GetxController implements TopicsPageState {
-  final AppNavigationState navigation;
-  TopicsPageGetxController({required this.navigation});
+  // final AppNavigationState navigation;
+
+  // TopicsPageGetxController({required this.navigation});
 
   var _topics = <String>[];
   @override
@@ -47,6 +48,6 @@ class TopicsPageGetxController extends GetxController implements TopicsPageState
   @override
   void showTopicArticles(String topic) {
     // Get.toNamed('/topics/$topic', id: 1);
-    navigation.setPath('/topics/$topic');
+    // navigation.setPath('/topics/$topic');
   }
 }

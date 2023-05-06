@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../models/top_level_routes.dart';
 import '../repositories/user_repository.dart';
 import '../states/app_navigation_state.dart';
 import '../states/login_page_state.dart';
@@ -16,6 +17,7 @@ class LoginPageGetxController extends GetxController implements LoginPageState {
   Future<void> login(BuildContext context) async {
     await UserRepository.login();
     userState.isLoggedIn = true;
-    navigation.setPath('/topics');
+    // navigation.setPath('/topics');
+    navigation.setRoute(TopLevelRoutes.topics());
   }
 }

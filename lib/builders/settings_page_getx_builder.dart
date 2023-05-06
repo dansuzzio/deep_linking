@@ -15,16 +15,23 @@ class SettingsPageGetxBuilder extends StatelessWidget {
     final navigationController = Get.find<AppNavigationGetxController>();
     final userController = Get.find<UserGetxController>();
 
-    return AppNavigationBar(
-      onTabSelected: (value) => value == 0 ? navigationController.setPath('/topics') : null,
-      selectedTabIndex: 1,
-      selectedTabBody: GetBuilder(
-        init: SettingsPageGetxController(
-          navigation: navigationController,
-          userState: userController,
-        ),
-        builder: (controller) => SettingsPage(state: controller),
+    // return AppNavigationBar(
+    //   onTabSelected: (value) => value == 0 ? navigationController.setPath('/topics') : null,
+    //   selectedTabIndex: 1,
+    //   selectedTabBody: GetBuilder(
+    //     init: SettingsPageGetxController(
+    //       navigation: navigationController,
+    //       userState: userController,
+    //     ),
+    //     builder: (controller) => SettingsPage(state: controller),
+    //   ),
+    // );
+    return GetBuilder(
+      init: SettingsPageGetxController(
+        navigation: navigationController,
+        userState: userController,
       ),
+      builder: (controller) => SettingsPage(state: controller),
     );
   }
 }
