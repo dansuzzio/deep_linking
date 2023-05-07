@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../controllers/app_navigation_getx_controller.dart';
 import '../controllers/article_list_page_getx_controller.dart';
 import '../controllers/navigation_bar_getx_controller.dart';
+import '../controllers/topics_navigation_getx_controller.dart';
 import '../pages/article_list_page.dart';
 
 class ArticleListPageGetxBuilder extends StatelessWidget {
@@ -14,13 +15,13 @@ class ArticleListPageGetxBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final navigationController = Get.find<AppNavigationGetxController>();
-    // final navigationController = Get.find<TopicsNavigationGetxController>();
+    final navigationController = Get.find<TopicsNavigationGetxController>();
 
     return GetBuilder(
       // init: ArticleListPageGetxController(topic: topic),
       init: ArticleListPageGetxController(
-          // navigation: navigationController,
-          ),
+        navigation: navigationController,
+      ),
       builder: (controller) => ArticleListPage(state: controller),
     );
   }

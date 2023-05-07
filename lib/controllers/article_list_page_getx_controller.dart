@@ -2,6 +2,7 @@ import 'package:faker/faker.dart';
 import 'package:get/get.dart';
 
 import '../models/article.dart';
+import '../models/topics_routes.dart';
 import '../repositories/articles_repository.dart';
 import '../states/app_navigation_state.dart';
 import '../states/article_list_page_state.dart';
@@ -14,11 +15,12 @@ class ArticleListPageGetxController extends GetxController implements ArticleLis
 
   // ArticleListPageGetxController({required this.topic});
 
-  // final AppNavigationState navigation;
-  // ArticleListPageGetxController({required this.navigation});
+  final AppNavigationState navigation;
+
+  ArticleListPageGetxController({required this.navigation});
+
   @override
-  // String get topic => Uri.parse(navigation.path).pathSegments.last;
-  String get topic => 'topic';
+  String get topic => Uri.parse(navigation.currentRoute.path ?? '').pathSegments.last;
 
   var _articles = <Article>[];
 
@@ -115,6 +117,7 @@ class ArticleListPageGetxController extends GetxController implements ArticleLis
 
   @override
   void showDetails(Article article) {
-    Get.toNamed('/topics/$topic/${article.title}', id: 1);
+    // Get.toNamed('/topics/$topic/${article.title}', id: 1);
+    navigation.setRoute(TopicsRoutes.article(article.topic, article.title));
   }
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../components/app_navigation_bar.dart';
 import '../controllers/app_navigation_getx_controller.dart';
 import '../controllers/navigation_bar_getx_controller.dart';
+import '../controllers/topics_navigation_getx_controller.dart';
 import '../controllers/topics_page_getx_controller.dart';
 import '../pages/topics_page.dart';
 
@@ -13,7 +14,7 @@ class TopicsPageGetxBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final navigationController = Get.find<AppNavigationGetxController>();
-    // final navigationController = Get.find<TopicsNavigationGetxController>();
+    final navigationController = Get.find<TopicsNavigationGetxController>();
 
     // return AppNavigationBar(
     //   onTabSelected: (value) => value == 1 ? navigationController.setPath('/settings') : null,
@@ -25,8 +26,8 @@ class TopicsPageGetxBuilder extends StatelessWidget {
     // );
     return GetBuilder(
       init: TopicsPageGetxController(
-          // navigation: navigationController,
-          ),
+        navigation: navigationController,
+      ),
       builder: (controller) => TopicsPage(state: controller),
     );
   }

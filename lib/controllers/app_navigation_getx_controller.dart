@@ -87,23 +87,5 @@ class AppNavigationGetxController extends GetxController implements AppNavigatio
     }
 
     return TopLevelRoutes.notFound(path);
-
-    // var newRoute = TopLevelRoutes.notFound(path);
-    // if (!isLoggedIn) newRoute = TopLevelRoutes.login();
-
-    // final pathSegments = Uri.parse(path).pathSegments;
-
-    // if (pathSegments.isEmpty) return TopLevelRoutes.topics();
-
-    // if (pathSegments.length == 1) {
-    //   final segment = pathSegments[0];
-    //   if (segment == 'login') return TopLevelRoutes.login();
-    //   if (segment == 'settings') return TopLevelRoutes.settings();
-    //   if (segment == 'topics') return TopLevelRoutes.topics();
-    // }
-
-    // setRoute(newRoute);
-
-    // return newRoute;
   }
 }
