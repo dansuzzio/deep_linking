@@ -5,10 +5,8 @@ import '../builders/article_details_page_getx_builder.dart';
 import '../builders/article_list_page_getx_builder.dart';
 import '../builders/create_item_page_getx_builder.dart';
 import '../builders/login_page_getx_builder.dart';
-import '../builders/navigation_bar_page_getx_builder.dart';
 import '../builders/settings_page_getx_builder.dart';
 import '../builders/topics_page_getx_builder.dart';
-import '../repositories/user_repository.dart';
 
 class GetxApp extends StatelessWidget {
   const GetxApp({super.key});
@@ -18,10 +16,8 @@ class GetxApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Deep Linking',
-      // initialRoute: UserRepository.isLoggedIn ? '/home' : '/login',
       getPages: [
         GetPage(name: '/login', page: () => const LoginPageGetxBuilder()),
-        // GetPage(name: '/home', page: () => const NavigationBarPageGetxBuilder()),
       ],
       unknownRoute: GetPage(
         name: '/notfound',

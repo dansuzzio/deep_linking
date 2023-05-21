@@ -1,15 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:go_router/go_router.dart';
-
-import '../pages/create_item_page.dart';
-import '../pages/article_details_page.dart';
-import '../pages/article_list_page.dart';
-import '../pages/login_page.dart';
-import '../pages/navigation_bar_page.dart';
-import '../pages/settings_page.dart';
-import '../pages/topics_page.dart';
-import '../repositories/user_repository.dart';
 
 class GoRouterApp extends StatelessWidget {
   const GoRouterApp({super.key});

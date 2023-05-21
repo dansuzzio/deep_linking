@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../states/navigation_bar_state.dart';
-
 class AppNavigationBar extends StatelessWidget {
   final int selectedTabIndex;
   final Widget selectedTabBody;
