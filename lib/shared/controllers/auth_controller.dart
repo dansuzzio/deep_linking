@@ -11,7 +11,8 @@ class AuthController implements AuthState {
   }
 
   @override
-  Future<void> initialize() async {
+  Future<void> fetchAuthState() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
     isLoggedIn = await AuthRepository.isLoggedIn;
   }
   

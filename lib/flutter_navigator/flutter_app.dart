@@ -39,22 +39,16 @@ class _FlutterAppState extends State<FlutterApp> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: _authController.initialize(),
-      builder: (_, snapshot) {
-        if (snapshot.connectionState != ConnectionState.done) return const CircularProgressIndicator();
-        return ListenableBuilder(
-          listenable: _navigation as FlutterAppNavigationController,
-          builder: (_, __) {
-            return MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              title: 'Flutter Navigator',
-              routerDelegate: _routerDelegate,
-              routeInformationParser: _routeInformationParser,
-            );
-          },
+    return ListenableBuilder(
+      listenable: _navigation as FlutterAppNavigationController,
+      builder: (_, __) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Navigator',
+          routerDelegate: _routerDelegate,
+          routeInformationParser: _routeInformationParser,
         );
-      }
+      },
     );
   }
 }

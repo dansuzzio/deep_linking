@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../builders/login_page_builder.dart';
 import '../builders/settings_page_builder.dart';
+import '../builders/splash_page_builder.dart';
 import '../entities/app_route.dart';
-import '../pages/initial_page.dart';
 
 enum TopRoutes implements AppRoute {
-  initial('/', InitialPage()),
+  splash('/', SplashPageBuilder()),
   login('/login', LoginPageBuilder()),
   settings('/settings', SettingsPageBuilder()),
   // topics('/topics'),

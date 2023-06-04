@@ -30,11 +30,8 @@ final beamerRouterDelegate = BeamerDelegate(
     BeamGuard(
       pathPatterns: [TopRoutes.login.path],
       guardNonMatching: true,
-      check: (context, location) {
-        final auth = GetIt.I.get<AuthState>();
-        return auth.isLoggedIn;
-      },
-      beamToNamed: (origin, target) => TopRoutes.login.path,
+      check: (_, __) => GetIt.I.get<AuthState>().isLoggedIn,
+      beamToNamed: (_, __) => TopRoutes.login.path,
     )
   ],
 );

@@ -10,7 +10,7 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
 
   FlutterAppNavigationController({required this.authState});
   
-  AppRoute _currentRoute = TopRoutes.settings;
+  AppRoute _currentRoute = TopRoutes.splash;
   @override
   AppRoute get currentRoute => _currentRoute;
 
