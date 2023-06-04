@@ -23,7 +23,8 @@ class NavigationBarPage extends StatelessWidget {
             label: 'Settings',
           ),
         ],
-        onTap: state.onTabSelected,
+        // onTap: state.onTabSelected,
+        onTap: (index)=>state.onTabSelected(index, context),
       ),
     );
   }

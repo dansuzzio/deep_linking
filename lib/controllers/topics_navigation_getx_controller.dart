@@ -1,4 +1,6 @@
+import 'package:beamer/beamer.dart';
 import 'package:deep_linking/entities/app_route.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/topics_routes.dart';
@@ -14,10 +16,14 @@ class TopicsNavigationGetxController extends GetxController implements AppNaviga
   @override
   AppRoute get currentRoute => _currentRoute;
   @override
-  void setRoute(AppRoute route) {
+  void setRoute(AppRoute route, [BuildContext? context]) {
     _currentRoute = route;
-    update();
+    // update();
+    beamerKey.currentContext?.beamToNamed(route.path);
+    // context?.beamToNamed(route.path);
   }
+
+  final beamerKey = GlobalKey<BeamerState>();
 
   @override
   AppRoute getRouteForPath(String path) {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-
-import 'apps/regular_app.dart';
+import 'apps/beamer_app.dart';
 import 'repositories/local_storage.dart';
 
 Future<void> main() async {
@@ -12,12 +11,16 @@ Future<void> main() async {
   usePathUrlStrategy();
 
   // Regular Navigator 2.0
-  await initializeDependencies();
-  runApp(const RegularApp());
+  // await initializeDependencies();
+  // runApp(const RegularApp());
 
-  // GetX NAvigation
+  // GetX navigation
   // runApp(const GetxApp());
 
   // GoRouter navigation
   // runApp(const GoRouterApp());
+
+  // Beamer navigation
+  await initializeDependencies();
+  runApp(const BeamerApp());
 }

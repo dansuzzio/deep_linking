@@ -18,6 +18,6 @@ class LoginPageGetxController extends GetxController implements LoginPageState {
     await UserRepository.login();
     userState.isLoggedIn = true;
     // navigation.setPath('/topics');
-    navigation.setRoute(TopLevelRoutes.topics());
+    if (context.mounted) navigation.setRoute(TopLevelRoutes.topics(), context);
   }
 }

@@ -1,15 +1,11 @@
+import 'package:flutter/material.dart';
+
 import '../entities/app_route.dart';
 
-// abstract class AppNavigationState {
-//   String get path;
-//   void setPath(String newPath);
-//   bool get isLoggedIn;
-//   bool get isUnknonwnRoute;
-//   List<Page> get pages;
-// }
-abstract class AppNavigationState {
+abstract interface class AppNavigationState {
+  // GlobalKey<State> get key;
   bool get isLoggedIn;
   AppRoute get currentRoute;
-  void setRoute(AppRoute route);
+  void setRoute(AppRoute route, [BuildContext? context]);
   AppRoute getRouteForPath(String path);
 }

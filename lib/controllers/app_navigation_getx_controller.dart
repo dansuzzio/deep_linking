@@ -1,3 +1,5 @@
+import 'package:beamer/beamer.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../entities/app_route.dart';
@@ -10,13 +12,17 @@ class AppNavigationGetxController extends GetxController implements AppNavigatio
   @override
   bool get isLoggedIn => _userController.isLoggedIn;
 
+  final observer = NavigatorObserver();
+
   AppRoute _currentRoute = TopLevelRoutes.initial();
   @override
   AppRoute get currentRoute => _currentRoute;
   @override
-  void setRoute(AppRoute route) {
-    _currentRoute = route;
-    update();
+  void setRoute(AppRoute route, [BuildContext? context]) {
+    // _currentRoute = route;
+    // update();
+    observer.navigator?.context.beamToNamed(route.path);
+    // context?.beamToNamed(route.path);
   }
 
   @override

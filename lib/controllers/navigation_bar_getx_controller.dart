@@ -21,12 +21,13 @@ class NavigationBarGetxController extends GetxController implements NavigationBa
   int get selectedTabIndex => isSettings ? 1 : 0;
 
   @override
-  void onTabSelected(int index) {
+  void onTabSelected(int index, [BuildContext? context]) {
     // navigation.setRoute(index == 1 ? '/settings' : '/topics');
-    navigation.setRoute(index == 1 ? TopLevelRoutes.settings() : TopLevelRoutes.topics());
+    navigation.setRoute(index == 1 ? TopLevelRoutes.settings() : TopLevelRoutes.topics(), context);
   }
 
   @override
   // Widget get selectedTabBody => isSettings ? settingsNavigator : topicsNavigator;
   Widget get selectedTabBody => isSettings ? const SettingsPageGetxBuilder() : const TopicsNavigatonGetxBuilder();
+  // Widget get selectedTabBody => isSettings ? const Center(child: Text('Settings')) : const Center(child: Text('Topics'));
 }

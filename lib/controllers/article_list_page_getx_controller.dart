@@ -20,7 +20,8 @@ class ArticleListPageGetxController extends GetxController implements ArticleLis
   ArticleListPageGetxController({required this.navigation});
 
   @override
-  String get topic => Uri.parse(navigation.currentRoute.path ?? '').pathSegments.last;
+  // String get topic => Uri.parse(navigation.currentRoute.path ?? '').pathSegments.last;
+  String get topic => Uri.parse(navigation.currentRoute.path).pathSegments.last;
 
   var _articles = <Article>[];
 

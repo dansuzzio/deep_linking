@@ -1,20 +1,30 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../entities/app_route.dart';
-import '../states/app_navigation_state.dart';
+import '../shared/entities/app_route.dart';
+import '../shared/states/app_navigation_state.dart';
 
-class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
+class FlutterRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
 
   final AppNavigationState state;
 
-  AppRouterDelegate({required this.state}) : navigatorKey = GlobalKey<NavigatorState>();
+  FlutterRouterDelegate({required this.state}) : navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   AppRoute get currentConfiguration {
     return state.currentRoute;
+  }
+
+  List<Page> get _routePages {
+    return [
+      MaterialPage(
+        key: ValueKey(currentConfiguration.path),
+        name: currentConfiguration.path,
+        child: currentConfiguration.builder,
+      )
+    ];
   }
 
   @override
@@ -22,22 +32,22 @@ class AppRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, Po
     return Navigator(
       key: navigatorKey,
       onPopPage: (route, result) => route.didPop(result),
-      // pages: state.currentRoute.pages,
+      pages: _routePages,
       reportsRouteUpdateToEngine: true,
     );
   }
 
   @override
   Future<void> setNewRoutePath(AppRoute configuration) async {
-    state.setRoute(configuration);
+    state.goTo(configuration);
     SynchronousFuture(null);
   }
 }
 
-class AppRouteInformationParser extends RouteInformationParser<AppRoute> {
+class FlutterRouteInformationParser extends RouteInformationParser<AppRoute> {
   final AppNavigationState state;
 
-  AppRouteInformationParser({required this.state});
+  FlutterRouteInformationParser({required this.state});
 
   @override
   Future<AppRoute> parseRouteInformation(RouteInformation routeInformation) async {
