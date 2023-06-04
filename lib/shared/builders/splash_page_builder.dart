@@ -26,7 +26,7 @@ class _SplashPageBuilderState extends State<SplashPageBuilder> {
   Future<void> _checkAuthAndGoToInitialPage() async {
     await _auth.fetchAuthState();
     if (_auth.isLoggedIn) {
-      _navigation.goTo(TopRoutes.settings);
+      _navigation.goTo(TopRoutes.topics);
     } else {
       _navigation.goTo(TopRoutes.login);
     }

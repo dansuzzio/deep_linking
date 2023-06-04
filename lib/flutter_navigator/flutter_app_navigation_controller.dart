@@ -9,7 +9,7 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
   final AuthState authState;
 
   FlutterAppNavigationController({required this.authState});
-  
+
   AppRoute _currentRoute = TopRoutes.splash;
   @override
   AppRoute get currentRoute => _currentRoute;
@@ -22,7 +22,16 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
 
   @override
   AppRoute getRouteForPath(String? path) {
+    // Returns login route when user is not logged in
     if (!authState.isLoggedIn) return TopRoutes.login;
-    return TopRoutes.values.firstWhere((route) => route.path == path, orElse: () => TopRoutes.notFound);
+
+    // Returns topics route when app is starting and user is logged in
+    if (path == '/') return TopRoutes.topics;
+
+    // Returns corresponding route, or not found if unknown
+    return TopRoutes.values.firstWhere(
+      (route) => route.path == path,
+      orElse: () => TopRoutes.notFound,
+    );
   }
 }

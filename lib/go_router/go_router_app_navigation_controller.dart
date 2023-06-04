@@ -25,6 +25,9 @@ class GoRouterAppNavigationController implements AppNavigationState {
 
   @override
   AppRoute getRouteForPath(String? path) {
-    return TopRoutes.values.firstWhere((route) => route.path == path, orElse: () => TopRoutes.notFound);
+    return TopRoutes.values.firstWhere(
+      (route) => route.path == path,
+      orElse: () => TopRoutes.notFound,
+    );
   }
 }

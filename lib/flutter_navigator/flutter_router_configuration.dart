@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../shared/entities/app_route.dart';
 import '../shared/states/app_navigation_state.dart';
+import '../shared/states/auth_state.dart';
 
 class FlutterRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
   @override
@@ -51,6 +53,7 @@ class FlutterRouteInformationParser extends RouteInformationParser<AppRoute> {
 
   @override
   Future<AppRoute> parseRouteInformation(RouteInformation routeInformation) async {
+    await GetIt.I.get<AuthState>().fetchAuthState();
     return state.getRouteForPath(routeInformation.location ?? '');
   }
 

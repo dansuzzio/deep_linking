@@ -9,7 +9,7 @@ import 'beamer_app_navigation_controller.dart';
 
 final beamerRouterDelegate = BeamerDelegate(
   navigatorObservers: [(GetIt.I.get<AppNavigationState>() as BeamerAppNavigationController).observer],
-  initialPath: TopRoutes.settings.path,
+  initialPath: TopRoutes.topics.path,
   locationBuilder: RoutesLocationBuilder(
     routes: {
       TopRoutes.login.path: (context, state, data) {
@@ -22,6 +22,12 @@ final beamerRouterDelegate = BeamerDelegate(
         return BeamPage(
           key: ValueKey(TopRoutes.settings.path),
           child: TopRoutes.settings.builder,
+        );
+      },
+      TopRoutes.topics.path: (context, state, data) {
+        return BeamPage(
+          key: ValueKey(TopRoutes.topics.path),
+          child: TopRoutes.topics.builder,
         );
       },
     },
