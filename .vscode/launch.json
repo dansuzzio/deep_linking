@@ -17,6 +17,13 @@
             "request": "launch",
             "program": "lib/beamer/beamer_app.dart",
             "deviceId": "chrome"
+        },
+        {
+            "name": "GoRouter Navigator",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/go_router/go_router_app.dart",
+            "deviceId": "chrome"
         }
     ]
 }
