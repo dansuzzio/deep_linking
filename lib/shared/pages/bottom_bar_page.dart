@@ -16,19 +16,19 @@ class BottomBarPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: selectedTabBody,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: selectedTabIndex,
-        items: const [
-          BottomNavigationBarItem(
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: selectedTabIndex,
+        destinations: const [
+          NavigationDestination(
             icon: Icon(Icons.topic),
             label: 'Topics',
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
         ],
-        onTap: onTabSelected,
+        onDestinationSelected: onTabSelected,
       ),
     );
   }
