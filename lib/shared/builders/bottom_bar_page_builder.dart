@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../beamer/beamer_topics_navigation_builder.dart';
 import '../models/top_routes.dart';
 import '../pages/bottom_bar_page.dart';
 import '../states/app_navigation_state.dart';
 import '../states/bottom_bar_state.dart';
 import 'settings_page_builder.dart';
-import 'topics_page_builder.dart';
 
 class BottomBarPageBuilder extends StatefulWidget {
   const BottomBarPageBuilder({super.key});
@@ -24,7 +24,7 @@ class _BottomBarPageBuilderState extends State<BottomBarPageBuilder> implements 
   int get selectedTabIndex => _isSettings ? 1 : 0;
 
   @override
-  Widget get selectedTabBody => _isSettings ? const SettingsPageBuilder() : const TopicsPageBuilder();
+  Widget get selectedTabBody => _isSettings ? const SettingsPageBuilder() : const BeamerTopicsNavigationBuilder();
 
   @override
   void onTabSelected(int index) {
