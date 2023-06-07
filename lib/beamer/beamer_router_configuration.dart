@@ -8,7 +8,7 @@ import '../shared/states/auth_state.dart';
 import 'beamer_app_navigation_controller.dart';
 
 final beamerRouterDelegate = BeamerDelegate(
-  navigatorObservers: [(GetIt.I.get<AppNavigationState>() as BeamerAppNavigationController).observer],
+  navigatorObservers: [(GetIt.I.get<AppNavigationState>(instanceName: 'app') as BeamerAppNavigationController).observer],
   initialPath: TopRoutes.topics.path,
   locationBuilder: RoutesLocationBuilder(
     routes: {

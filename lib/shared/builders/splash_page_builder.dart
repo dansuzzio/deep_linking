@@ -15,7 +15,7 @@ class SplashPageBuilder extends StatefulWidget {
 
 class _SplashPageBuilderState extends State<SplashPageBuilder> {
   final _auth = GetIt.I.get<AuthState>();
-  final _navigation = GetIt.I.get<AppNavigationState>();
+  final _navigation = GetIt.I.get<AppNavigationState>(instanceName: 'app');
 
   @override
   void initState() {

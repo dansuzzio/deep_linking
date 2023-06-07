@@ -12,7 +12,7 @@ class FlutterRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier
 
   final AppNavigationState state;
 
-  FlutterRouterDelegate({required this.state}) : navigatorKey = GlobalKey<NavigatorState>();
+  FlutterRouterDelegate({required this.state}) : navigatorKey = GlobalKey<NavigatorState>(debugLabel: 'app');
 
   @override
   AppRoute get currentConfiguration {

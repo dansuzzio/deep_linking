@@ -16,7 +16,7 @@ class SettingsPageBuilder extends StatefulWidget {
 }
 
 class _SettingsPageBuilderState extends State<SettingsPageBuilder> implements SettingsPageState {
-  final _navigation = GetIt.I.get<AppNavigationState>();
+  final _navigation = GetIt.I.get<AppNavigationState>(instanceName: 'app');
   final _auth = GetIt.I.get<AuthState>();
 
   @override

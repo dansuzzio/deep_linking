@@ -8,7 +8,7 @@ import 'go_router_app_navigation_controller.dart';
 
 final goRouterConfiguration = GoRouter(
   debugLogDiagnostics: true,
-  navigatorKey: (GetIt.I.get<AppNavigationState>() as GoRouterAppNavigationController).key,
+  navigatorKey: (GetIt.I.get<AppNavigationState>(instanceName: 'app') as GoRouterAppNavigationController).key,
   redirect: (context, state) async {
     if (state.location == TopRoutes.login.path) return null;
     final authState = GetIt.I.get<AuthState>();

@@ -15,7 +15,7 @@ class LoginPageBuilder extends StatefulWidget {
 }
 
 class _LoginPageBuilderState extends State<LoginPageBuilder> implements LoginPageState {
-  final _navigation = GetIt.I.get<AppNavigationState>();
+  final _navigation = GetIt.I.get<AppNavigationState>(instanceName: 'app');
   final _auth = GetIt.I.get<AuthState>();
 
   @override
