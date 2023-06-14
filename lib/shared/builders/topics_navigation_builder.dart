@@ -8,7 +8,6 @@ Widget get topicsNavigationBuilder {
   return switch (currentNavigationSolution) {
     NavigationSolution.beamer => const BeamerTopicsNavigationBuilder(),
     NavigationSolution.flutter => const FlutterTopicsNavigationBuilder(),
-    NavigationSolution.goRouter => throw UnimplementedError(),
     _ => throw UnimplementedError(),
   };
 }

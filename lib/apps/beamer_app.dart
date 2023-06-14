@@ -11,7 +11,6 @@ Future<void> initializeDependencies() async {
   Get.put(AppNavigationGetxController());
 }
 
-
 class BeamerApp extends StatelessWidget {
   const BeamerApp({super.key});
 

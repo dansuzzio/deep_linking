@@ -5,6 +5,7 @@ import '../shared/models/top_routes.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
 import 'go_router_app_navigation_controller.dart';
+import 'go_router_topics_navigation_builder.dart';
 
 final goRouterConfiguration = GoRouter(
   debugLogDiagnostics: true,
@@ -22,13 +23,6 @@ final goRouterConfiguration = GoRouter(
       path: TopRoutes.login.path,
       builder: (context, state) => TopRoutes.login.builder,
     ),
-    GoRoute(
-      path: TopRoutes.settings.path,
-      builder: (context, state) => TopRoutes.settings.builder,
-    ),
-    GoRoute(
-      path: TopRoutes.topics.path,
-      builder: (context, state) => TopRoutes.topics.builder,
-    ),
+    goRouterTopicsNavigationBuilder,
   ],
 );
