@@ -10,24 +10,28 @@ class GoRouterAppNavigationController implements AppNavigationState {
 
   BuildContext? get _context => key.currentContext;
 
-  @override
-  AppRoute get currentRoute {
-    String? path;
-    if (_context case final context?) path = GoRouter.of(context).location;
-    return getRouteForPath(path);
-  }
+  String? get _path => _context != null ? GoRouter.of(_context!).location : null;
 
   @override
-  void goTo(AppRoute route) {
+  AppRoute get currentRoute => getRouteForPath(_path);
+
+  @override
+  List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
+
+  @override
+  AppRoute? savedRoute;
+
+  @override
+  void goTo(AppRoute route, {List<String>? segments}) {
     if (_context case final context?) return context.go(route.path);
     throw Exception('No context');
   }
 
   @override
   AppRoute getRouteForPath(String? path) {
-    return TopRoutes.values.firstWhere(
-      (route) => route.path == path,
-      orElse: () => TopRoutes.notFound,
-    );
+    if (path == Routes.login().path) return Routes.login();
+    if (path == Routes.settings().path) return Routes.home(showSettings: true);
+    if (path == Routes.home().path) return Routes.home();
+    return Routes.notFound();
   }
 }

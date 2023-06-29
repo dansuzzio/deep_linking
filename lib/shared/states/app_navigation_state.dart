@@ -4,6 +4,9 @@ abstract interface class AppNavigationState {
   // GlobalKey<NavigatorState> get key;
   // bool get isLoggedIn;
   AppRoute get currentRoute;
-  void goTo(AppRoute route);
+  // String? get savedLocation;
+  AppRoute? get savedRoute;
+  List<String> get pathSegments;
+  void goTo(AppRoute route, {List<String>? segments});
   AppRoute getRouteForPath(String? path);
 }

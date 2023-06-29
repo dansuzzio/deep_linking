@@ -10,23 +10,27 @@ class BeamerAppNavigationController implements AppNavigationState {
 
   BuildContext? get _context => observer.navigator?.context;
 
-  @override
-  AppRoute get currentRoute {
-    final path = _context?.currentBeamLocation.state.routeInformation.location;
-    return getRouteForPath(path);
-  }
+  String? get _path => _context?.currentBeamLocation.state.routeInformation.location;
 
   @override
-  void goTo(AppRoute route) {
+  AppRoute get currentRoute => getRouteForPath(_path);
+
+  @override
+  List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
+
+  @override
+  void goTo(AppRoute route, {List<String>? segments}) {
     if (_context case final context?) return context.beamToNamed(route.path);
     throw Exception('No context');
   }
 
   @override
   AppRoute getRouteForPath(String? path) {
-    return TopRoutes.values.firstWhere(
-      (route) => route.path == path,
-      orElse: () => TopRoutes.notFound,
-    );
+    if (path == Routes.settings().path) return Routes.home(showSettings: true);
+    if (path == Routes.home().path) return Routes.home();
+    return Routes.notFound();
   }
+
+  @override
+  AppRoute? get savedRoute => throw UnimplementedError();
 }

@@ -7,7 +7,6 @@ import '../states/app_navigation_state.dart';
 import '../states/settings_page_state.dart';
 import '../states/auth_state.dart';
 
-
 class SettingsPageBuilder extends StatefulWidget {
   const SettingsPageBuilder({super.key});
 
@@ -22,7 +21,8 @@ class _SettingsPageBuilderState extends State<SettingsPageBuilder> implements Se
   @override
   Future<void> logout() async {
     await _auth.logout();
-    _navigation.goTo(TopRoutes.login);
+    // _navigation.goTo(TopRoutes.login);
+    _navigation.goTo(Routes.login());
   }
 
   @override

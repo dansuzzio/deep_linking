@@ -14,24 +14,28 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
   @override
   AppRoute get currentRoute => _currentRoute;
 
+  String? _path = Routes.home().path;
+
   @override
-  void goTo(AppRoute route) {
+  List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
+
+  @override
+  void goTo(AppRoute route, {List<String>? segments}) {
     _currentRoute = route;
     notifyListeners();
   }
 
   @override
   AppRoute getRouteForPath(String? path) {
-    // Returns login route when user is not logged in
-    if (!authState.isLoggedIn) return TopRoutes.login;
-
-    // Returns topics route when app is starting and user is logged in
-    if (path == '/') return TopRoutes.topics;
-
-    // Returns corresponding route, or not found if unknown
-    return TopRoutes.values.firstWhere(
-      (route) => route.path == path,
-      orElse: () => TopRoutes.notFound,
-    );
+    _path = path;
+    var route = Routes.notFound();
+    if (!authState.isLoggedIn) route = Routes.login();
+    if (_path == '/' || _path == Routes.home().path) route = Routes.home();
+    if (_path == Routes.settings().path) route = Routes.home(showSettings: true);
+    _currentRoute = route;
+    return route;
   }
+
+  @override
+  AppRoute? get savedRoute => throw UnimplementedError();
 }

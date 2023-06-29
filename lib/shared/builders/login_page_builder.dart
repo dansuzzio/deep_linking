@@ -21,7 +21,9 @@ class _LoginPageBuilderState extends State<LoginPageBuilder> implements LoginPag
   @override
   Future<void> login() async {
     await _auth.login();
-    _navigation.goTo(TopRoutes.topics);
+    // _navigation.goTo(TopRoutes.topics);
+    // _navigation.goTo(Routes.topics());
+    _navigation.goTo(Routes.home());
   }
 
   @override
