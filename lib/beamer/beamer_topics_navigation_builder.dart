@@ -2,13 +2,14 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/states/app_navigation_state.dart';
 import 'beamer_topics_navigation_controller.dart';
 
 class BeamerTopicsNavigationBuilder extends StatelessWidget {
   const BeamerTopicsNavigationBuilder({super.key});
 
+  /// Documentation comment
   BeamerTopicsNavigationController get _navigation => GetIt.I.get<AppNavigationState>(instanceName: 'topics') as BeamerTopicsNavigationController;
 
   @override
@@ -19,12 +20,15 @@ class BeamerTopicsNavigationBuilder extends StatelessWidget {
         initialPath: Routes.topics().path,
         locationBuilder: RoutesLocationBuilder(
           routes: {
+            // Regular comment
             Routes.topics().path: (context, state, data) {
               return BeamPage(
                 key: ValueKey(Routes.topics().path),
                 child: Routes.topics().builder,
               );
             },
+            
+            // Regular comment
             Routes.articles().path: (context, state, data) {
               final parameter = Routes.articles().path.split('/').last.replaceFirst(':', '');
               final topic = state.pathParameters[parameter] ?? '';
@@ -38,6 +42,8 @@ class BeamerTopicsNavigationBuilder extends StatelessWidget {
         routeListener: (RouteInformation info, BeamerDelegate delegate) {
           _navigation.onLocationChanged();
         },
+
+        // Regular comment
         guards: [
           BeamGuard(
             pathPatterns: [Routes.topics().path],
@@ -59,6 +65,7 @@ class BeamerTopicsNavigationBuilder extends StatelessWidget {
   }
 }
 
+/// Documentation comment
 class TopicsLocation extends BeamLocation<BeamState> {
   @override
   List<String> get pathPatterns => [Routes.articles().path];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../models/top_routes.dart';
+import '../models/routes.dart';
 import '../pages/settings_page.dart';
 import '../states/app_navigation_state.dart';
 import '../states/settings_page_state.dart';

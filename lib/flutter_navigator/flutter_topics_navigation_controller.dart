@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared/entities/app_route.dart';
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/states/app_navigation_state.dart';
 
 class FlutterTopicsNavigationController with ChangeNotifier implements AppNavigationState {

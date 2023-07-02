@@ -4,24 +4,9 @@ import '../builders/article_list_page_builder.dart';
 import '../builders/bottom_bar_page_builder.dart';
 import '../builders/login_page_builder.dart';
 import '../builders/settings_page_builder.dart';
+import '../builders/splash_page_builder.dart';
 import '../builders/topics_page_builder.dart';
 import '../entities/app_route.dart';
-import '../pages/splash_page.dart';
-
-enum TopRoutes with AppRoute {
-  splash('/', SplashPage()),
-  login('/login', LoginPageBuilder()),
-  settings('/settings', BottomBarPageBuilder()),
-  topics('/topics', BottomBarPageBuilder()),
-  notFound('/not-found', Center(child: Text('404')));
-
-  @override
-  final String path;
-  @override
-  final Widget builder;
-
-  const TopRoutes(this.path, this.builder);
-}
 
 class Routes implements AppRoute {
   @override
@@ -33,13 +18,17 @@ class Routes implements AppRoute {
       : path = '/not-found',
         builder = const Center(child: Text('404'));
 
+  Routes.splash()
+      : path = '/',
+        builder = const SplashPageBuilder();
+
   Routes.login()
       : path = '/login',
         builder = const LoginPageBuilder();
 
   Routes.home({bool showSettings = false})
       : path = showSettings ? Routes.settings().path : Routes.topics().path,
-        builder = TestBottomBarPageBuilder(initialTabIndex: showSettings ? 1 : 0);
+        builder = BottomBarPageBuilder(initialTabIndex: showSettings ? 1 : 0);
 
   Routes.settings()
       : path = '/settings',

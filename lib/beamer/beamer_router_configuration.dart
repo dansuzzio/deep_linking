@@ -2,7 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
 import 'beamer_app_navigation_controller.dart';

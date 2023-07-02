@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get_it/get_it.dart';
 
-import '../shared/app_info.dart';
+import '../shared/controllers/app_info.dart';
 import '../shared/controllers/auth_controller.dart';
 import '../shared/repositories/local_storage.dart';
 import '../shared/states/app_navigation_state.dart';

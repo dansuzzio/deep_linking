@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../shared/entities/app_route.dart';
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
 
@@ -10,14 +10,16 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
 
   FlutterAppNavigationController({required this.authState});
 
-  AppRoute _currentRoute = TopRoutes.splash;
+  AppRoute _currentRoute = Routes.splash();
   @override
   AppRoute get currentRoute => _currentRoute;
 
-  String? _path = Routes.home().path;
+  String? _path = Routes.splash().path;
 
   @override
   List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
+  // @override
+  // List<String> get pathSegments => throw UnimplementedError();
 
   @override
   void goTo(AppRoute route, {List<String>? segments}) {
@@ -29,12 +31,20 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
   AppRoute getRouteForPath(String? path) {
     _path = path;
     var route = Routes.notFound();
-    if (!authState.isLoggedIn) route = Routes.login();
-    if (_path == '/' || _path == Routes.home().path) route = Routes.home();
-    if (_path == Routes.settings().path) route = Routes.home(showSettings: true);
-    _currentRoute = route;
-    return route;
+    print('path: $_path');
+    if (!authState.isLoggedIn) {
+      route = Routes.login();
+    } else if (_path == Routes.splash().path) {
+      route = Routes.splash();
+    } else if (_path == Routes.home().path) {
+      route = Routes.home();
+    } else if (_path == Routes.home(showSettings: true).path) {
+      route = Routes.home(showSettings: true);
+    }
+    return _currentRoute = route;
   }
+  // @override
+  // AppRoute getRouteForPath(String? path) => throw UnimplementedError();
 
   @override
   AppRoute? get savedRoute => throw UnimplementedError();

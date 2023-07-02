@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../models/top_routes.dart';
+import '../models/routes.dart';
 import '../pages/splash_page.dart';
 import '../states/app_navigation_state.dart';
 import '../states/auth_state.dart';
@@ -26,12 +26,12 @@ class _SplashPageBuilderState extends State<SplashPageBuilder> {
   Future<void> _checkAuthAndGoToInitialPage() async {
     await _auth.fetchAuthState();
     if (_auth.isLoggedIn) {
-      _navigation.goTo(TopRoutes.topics);
+      _navigation.goTo(Routes.home());
     } else {
-      _navigation.goTo(TopRoutes.login);
+      _navigation.goTo(Routes.login());
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return const SplashPage();

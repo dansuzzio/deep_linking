@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/pages/bottom_bar_page.dart';
 import '../shared/states/app_navigation_state.dart';
 import 'go_router_topics_navigation_controller.dart';

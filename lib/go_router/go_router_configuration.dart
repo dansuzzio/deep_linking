@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
-import '../shared/models/top_routes.dart';
+import '../shared/models/routes.dart';
 import '../shared/repositories/topics_repository.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
@@ -13,7 +13,7 @@ final goRouterConfiguration = GoRouter(
   navigatorKey: (GetIt.I.get<AppNavigationState>(instanceName: 'app') as GoRouterAppNavigationController).key,
   redirect: (context, state) async {
     // If route is login, continues
-    if (state.location == TopRoutes.login.path) return null;
+    if (state.location == Routes.login().path) return null;
 
     // If user is not logged in, shows login page
     final authState = GetIt.I.get<AuthState>();
@@ -29,7 +29,7 @@ final goRouterConfiguration = GoRouter(
     // Continues to specified route
     return null;
   },
-  initialLocation: TopRoutes.topics.path,
+  initialLocation: Routes.home().path,
   routes: [
     GoRoute(
       path: Routes.login().path,
