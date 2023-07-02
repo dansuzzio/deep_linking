@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../shared/entities/app_route.dart';
 import '../shared/models/routes.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
+import 'flutter_topics_navigation_controller.dart';
 
 class FlutterAppNavigationController with ChangeNotifier implements AppNavigationState {
   final AuthState authState;
@@ -18,11 +20,16 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
 
   @override
   List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
-  // @override
-  // List<String> get pathSegments => throw UnimplementedError();
 
   @override
   void goTo(AppRoute route, {List<String>? segments}) {
+    // Resets topics route when loggin out
+    if (route.path == Routes.login().path && GetIt.I.isRegistered<AppNavigationState>(instanceName: 'topics')) {
+      final topicsNavigation = GetIt.I.get<AppNavigationState>(instanceName: 'topics') as FlutterTopicsNavigationController;
+      topicsNavigation.currentRoute = Routes.topics();
+    }
+
+    // Updates current route
     _currentRoute = route;
     notifyListeners();
   }
@@ -31,20 +38,15 @@ class FlutterAppNavigationController with ChangeNotifier implements AppNavigatio
   AppRoute getRouteForPath(String? path) {
     _path = path;
     var route = Routes.notFound();
-    print('path: $_path');
     if (!authState.isLoggedIn) {
       route = Routes.login();
-    } else if (_path == Routes.splash().path) {
-      route = Routes.splash();
-    } else if (_path == Routes.home().path) {
-      route = Routes.home();
     } else if (_path == Routes.home(showSettings: true).path) {
       route = Routes.home(showSettings: true);
+    } else if ([Routes.splash().path, Routes.home().path, Routes.login().path].contains(_path)) {
+      route = Routes.home();
     }
     return _currentRoute = route;
   }
-  // @override
-  // AppRoute getRouteForPath(String? path) => throw UnimplementedError();
 
   @override
   AppRoute? get savedRoute => throw UnimplementedError();

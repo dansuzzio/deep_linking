@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import '../shared/entities/app_route.dart';
 import '../shared/states/app_navigation_state.dart';
 import '../shared/states/auth_state.dart';
+import 'flutter_app_navigation_controller.dart';
 
 class FlutterRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier, PopNavigatorRouterDelegateMixin<AppRoute> {
   @override
@@ -20,22 +21,28 @@ class FlutterRouterDelegate extends RouterDelegate<AppRoute> with ChangeNotifier
   }
 
   List<Page> get _routePages {
+    final route = currentConfiguration;
     return [
       MaterialPage(
-        key: ValueKey(currentConfiguration.path),
-        name: currentConfiguration.path,
-        child: currentConfiguration.builder,
+        key: ValueKey(route.path),
+        name: route.path,
+        child: route.builder,
       )
     ];
   }
 
   @override
   Widget build(BuildContext context) {
-    return Navigator(
-      key: navigatorKey,
-      onPopPage: (route, result) => route.didPop(result),
-      pages: _routePages,
-      reportsRouteUpdateToEngine: true,
+    return ListenableBuilder(
+      listenable: state as FlutterAppNavigationController,
+      builder: (_, __) {
+        return Navigator(
+          key: navigatorKey,
+          onPopPage: (route, result) => route.didPop(result),
+          pages: _routePages,
+          reportsRouteUpdateToEngine: true,
+        );
+      },
     );
   }
 
@@ -54,7 +61,8 @@ class FlutterRouteInformationParser extends RouteInformationParser<AppRoute> {
   @override
   Future<AppRoute> parseRouteInformation(RouteInformation routeInformation) async {
     await GetIt.I.get<AuthState>().fetchAuthState();
-    return state.getRouteForPath(routeInformation.location ?? '');
+    final route = state.getRouteForPath(routeInformation.location ?? '');
+    return route;
   }
 
   @override

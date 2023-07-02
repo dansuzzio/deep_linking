@@ -40,7 +40,7 @@ class Routes implements AppRoute {
 
   Routes.articles({String topic = ':topic'})
       : path = '${Routes.topics().path}/$topic',
-        builder = TestArticleListPageBuilder(topic: topic);
+        builder = ArticleListPageBuilder(topic: topic);
 
   @override
   String buildLocation(List<String> replacements) => throw UnimplementedError();

@@ -10,11 +10,14 @@ class FlutterTopicsNavigationController with ChangeNotifier implements AppNaviga
   AppRoute _currentRoute = Routes.topics();
   @override
   AppRoute get currentRoute => _currentRoute;
+  set currentRoute(AppRoute route) => _currentRoute = route;
 
   String? get _path => currentRoute.path;
 
   @override
   List<String> get pathSegments => Uri.parse(_path ?? '').pathSegments;
+  // @override
+  // List<String> get pathSegments => throw UnimplementedError();
 
   @override
   void goTo(AppRoute route, {List<String>? segments}) {
@@ -22,16 +25,22 @@ class FlutterTopicsNavigationController with ChangeNotifier implements AppNaviga
     notifyListeners();
   }
 
-  // @override
-  // AppRoute getRouteForPath(String? path) {
-  //   var route = Routes.notFound();
-  //   if (pathSegments.length == 2) route = Routes.articles(topic: pathSegments[1]);
-  //   if (path == Routes.topics().path) route = Routes.topics();
-  //   _currentRoute = route;
-  //   return route;
-  // }
+  AppRoute? _savedRoute = null;
   @override
-  AppRoute getRouteForPath(String? path) => throw UnimplementedError();
+  AppRoute? get savedRoute => _savedRoute;
+
+  @override
+  AppRoute getRouteForPath(String? path) {
+    final segments = Uri.parse(path ?? '').pathSegments;
+    var route = Routes.notFound();
+    if (segments.length == 2) route = Routes.articles(topic: segments[1]);
+    if (path == Routes.topics().path) route = Routes.topics();
+    // _currentRoute = route;
+    _currentRoute = route;
+    return route;
+  }
+  // @override
+  // AppRoute getRouteForPath(String? path) => throw UnimplementedError();
 
   List<Page> get routePages {
     final pages = [
@@ -53,7 +62,4 @@ class FlutterTopicsNavigationController with ChangeNotifier implements AppNaviga
     }
     return pages;
   }
-
-  @override
-  AppRoute? get savedRoute => throw UnimplementedError();
 }

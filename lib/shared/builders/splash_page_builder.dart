@@ -20,7 +20,7 @@ class _SplashPageBuilderState extends State<SplashPageBuilder> {
   @override
   void initState() {
     super.initState();
-    _checkAuthAndGoToInitialPage();
+    // _checkAuthAndGoToInitialPage();
   }
 
   Future<void> _checkAuthAndGoToInitialPage() async {
